@@ -21,10 +21,10 @@
           @if (authService.username() === art.author.username) {
             <span>
               <a [routerLink]="['/editor', art.slug]" class="btn btn-outline-secondary btn-sm">
-                <i class="ion-edit"></i> Edit Article
+                <app-icon name="pencil-fill" /> Edit Article
               </a>
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteArticle()">
-                <i class="ion-trash-a"></i> Delete Article
+                <app-icon name="trash-fill" /> Delete Article
               </button>
             </span>
           } @else {
@@ -36,7 +36,7 @@
                 [class.btn-outline-secondary]="!art.author.following"
                 (click)="toggleFollow()"
               >
-                <i class="ion-plus-round"></i>
+                <app-icon name="person-plus-fill" />
                 {{ art.author.following ? 'Unfollow' : 'Follow' }} {{ art.author.username }}
               </button>
               &nbsp;
@@ -47,7 +47,7 @@
                 [class.btn-outline-primary]="!art.favorited"
                 (click)="toggleFavorite()"
               >
-                <i class="ion-heart"></i>
+                <app-icon name="heart-fill" />
                 {{ art.favorited ? 'Unfavorite' : 'Favorite' }} Article ({{ art.favoritesCount }})
               </button>
             </span>

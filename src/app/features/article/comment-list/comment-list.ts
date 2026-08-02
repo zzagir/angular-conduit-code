@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { RouterLink } from '@angular/router';
 
 import { Comment } from '../../../core/models/comment.model';
+import { Icon } from '../../../shared/components/icon/icon';
 
 @Component({
   selector: 'app-comment-list',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, Icon],
   templateUrl: './comment-list.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
