@@ -87,12 +87,34 @@ a {
     font-size: 1.5rem;
   }
 
+  .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-item + .nav-item {
+    margin-left: 1rem;
+  }
+
   .nav-link {
     color: #999;
 
     &.active {
       color: #333;
       font-weight: 600;
+    }
+  }
+
+  .btn-signup {
+    background-color: $conduit-green;
+    color: #fff !important;
+    border-radius: 4px;
+    padding: 0.375rem 0.9rem;
+
+    &:hover,
+    &.active {
+      background-color: $conduit-green-dark;
+      color: #fff !important;
     }
   }
 
@@ -107,7 +129,7 @@ a {
 
 // Home page banner
 .banner {
-  background: #333;
+  background: $conduit-green;
   color: #fff;
   padding: 2rem 0;
   margin-bottom: 2rem;
