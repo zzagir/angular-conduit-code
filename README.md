@@ -13,7 +13,12 @@ An Angular implementation of the [RealWorld](https://github.com/gothinkster/real
 
 ## API
 
-The app talks to the public RealWorld demo backend at `https://api.realworld.io/api` (configured in `src/app/core/api.config.ts` via an `API_URL` injection token — change it there if you want to point at a different backend implementing the [RealWorld API spec](https://realworld-docs.netlify.app/specifications/backend/)).
+The app talks to the public RealWorld demo backend at `https://api.realworld.io/api`. The URL lives in the Angular environment files:
+
+- `src/environments/environment.ts` — used by `ng build` (production)
+- `src/environments/environment.development.ts` — used by `ng serve` / `ng build --configuration development`
+
+Both are swapped in via the `fileReplacements` in `angular.json`. `src/app/core/api.config.ts` exposes an `API_URL` injection token backed by `environment.apiUrl`; every HTTP service (`core/services/*.service.ts`) injects that token, so pointing the app at a different backend implementing the [RealWorld API spec](https://realworld-docs.netlify.app/specifications/backend/) only requires editing the two environment files.
 
 ## Project layout
 
