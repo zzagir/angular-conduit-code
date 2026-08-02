@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { extractApiErrors } from '../../core/api-error.util';
 import { AuthService } from '../../core/services/auth.service';
 import { ListErrors } from '../../shared/components/list-errors/list-errors';
 
@@ -48,7 +49,7 @@ export class Settings {
       },
       error: (error: HttpErrorResponse) => {
         this.isSubmitting.set(false);
-        this.errors.set(error.error?.errors ?? { '': ['Unable to update settings'] });
+        this.errors.set(extractApiErrors(error, 'Unable to update settings'));
       },
     });
   }

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
+import { extractApiErrors } from '../../../core/api-error.util';
 import { AuthService } from '../../../core/services/auth.service';
 import { ListErrors } from '../../../shared/components/list-errors/list-errors';
 
@@ -40,7 +41,7 @@ export class Login {
       },
       error: (error: HttpErrorResponse) => {
         this.isSubmitting.set(false);
-        this.errors.set(error.error?.errors ?? { '': ['Unable to sign in'] });
+        this.errors.set(extractApiErrors(error, 'Unable to sign in'));
       },
     });
   }
