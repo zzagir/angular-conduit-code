@@ -1,0 +1,26 @@
+@for (comment of comments(); track comment.id) {
+  <div class="card">
+    <div class="card-block">
+      <p class="card-text">{{ comment.body }}</p>
+    </div>
+    <div class="card-footer">
+      <a [routerLink]="['/profile', comment.author.username]" class="comment-author">
+        <img
+          [src]="comment.author.image || 'https://api.realworld.io/images/smiley-cyrus.jpg'"
+          class="comment-author-img"
+          alt=""
+        />
+      </a>
+      &nbsp;
+      <a [routerLink]="['/profile', comment.author.username]" class="comment-author">{{
+        comment.author.username
+      }}</a>
+      <span class="date-posted">{{ comment.createdAt | date: 'longDate' }}</span>
+      @if (comment.author.username === currentUsername()) {
+        <span class="mod-options">
+          <i class="ion-trash-a" (click)="deleteComment.emit(comment.id)"></i>
+        </span>
+      }
+    </div>
+  </div>
+}

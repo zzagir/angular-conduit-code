@@ -1,0 +1,68 @@
+<div class="home-page">
+  <div class="banner">
+    <div class="container">
+      <h1 class="logo-font">conduit</h1>
+      <p>A place to share your knowledge.</p>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+            @if (authService.isAuthenticated()) {
+              <li class="nav-item">
+                <button
+                  type="button"
+                  class="nav-link"
+                  [class.active]="feedType() === 'your'"
+                  (click)="selectYourFeed()"
+                >
+                  Your Feed
+                </button>
+              </li>
+            }
+            <li class="nav-item">
+              <button
+                type="button"
+                class="nav-link"
+                [class.active]="feedType() === 'global'"
+                (click)="selectGlobalFeed()"
+              >
+                Global Feed
+              </button>
+            </li>
+            @if (feedType() === 'tag') {
+              <li class="nav-item">
+                <button type="button" class="nav-link active"># {{ selectedTag() }}</button>
+              </li>
+            }
+          </ul>
+        </div>
+
+        <app-article-list
+          [articles]="articles()"
+          [articlesCount]="articlesCount()"
+          [pageSize]="pageSize"
+          [currentPage]="currentPage()"
+          [isLoading]="isLoading()"
+          (pageChange)="onPageChange($event)"
+          (articleUpdated)="onArticleUpdated($event)"
+        />
+      </div>
+
+      <div class="col-md-3">
+        <div class="sidebar">
+          <p>Popular Tags</p>
+
+          <app-tag-list-select
+            [tags]="tags()"
+            [selectedTag]="selectedTag()"
+            (tagSelected)="selectTag($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
