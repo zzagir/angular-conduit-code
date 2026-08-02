@@ -1,0 +1,74 @@
+@if (profile(); as prof) {
+  <div class="profile-page">
+    <div class="user-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-10 offset-md-1">
+            <img
+              [src]="prof.image || 'https://api.realworld.io/images/smiley-cyrus.jpg'"
+              class="user-img"
+              [alt]="prof.username"
+            />
+            <h4>{{ prof.username }}</h4>
+            @if (prof.bio) {
+              <p>{{ prof.bio }}</p>
+            }
+
+            @if (authService.username() !== prof.username) {
+              <button
+                type="button"
+                class="btn btn-sm action-btn"
+                [class.btn-secondary]="prof.following"
+                [class.btn-outline-secondary]="!prof.following"
+                (click)="toggleFollow()"
+              >
+                <i class="ion-plus-round"></i>
+                {{ prof.following ? 'Unfollow' : 'Follow' }} {{ prof.username }}
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <div class="articles-toggle">
+            <ul class="nav nav-pills outline-active">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  [routerLink]="['/profile', prof.username]"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  My Articles
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  [routerLink]="['/profile', prof.username, 'favorites']"
+                  routerLinkActive="active"
+                >
+                  Favorited Articles
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <app-article-list
+            [articles]="articles()"
+            [articlesCount]="articlesCount()"
+            [pageSize]="pageSize"
+            [currentPage]="currentPage()"
+            [isLoading]="isLoading()"
+            (pageChange)="onPageChange($event)"
+            (articleUpdated)="onArticleUpdated($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+}

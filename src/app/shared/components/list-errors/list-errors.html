@@ -1,0 +1,9 @@
+@if (errors(); as errorMap) {
+  <ul class="error-messages">
+    @for (field of Object.keys(errorMap); track field) {
+      @for (message of errorMap[field]; track message) {
+        <li>{{ field }} {{ message }}</li>
+      }
+    }
+  </ul>
+}
