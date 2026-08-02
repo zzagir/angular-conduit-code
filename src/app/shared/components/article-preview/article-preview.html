@@ -20,7 +20,7 @@
         [class.btn-outline-primary]="!article().favorited"
         (click)="onToggleFavorite(article())"
       >
-        <i class="ion-heart"></i> {{ article().favoritesCount }}
+        <app-icon name="heart-fill" /> {{ article().favoritesCount }}
       </button>
     }
   </div>

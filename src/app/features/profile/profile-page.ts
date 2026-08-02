@@ -9,12 +9,13 @@ import { ArticlesService } from '../../core/services/articles.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ProfilesService } from '../../core/services/profiles.service';
 import { ArticleList } from '../../shared/components/article-list/article-list';
+import { Icon } from '../../shared/components/icon/icon';
 
 const PAGE_SIZE = 10;
 
 @Component({
   selector: 'app-profile-page',
-  imports: [RouterLink, RouterLinkActive, ArticleList],
+  imports: [RouterLink, RouterLinkActive, ArticleList, Icon],
   templateUrl: './profile-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

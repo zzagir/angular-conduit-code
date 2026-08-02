@@ -10,13 +10,14 @@ import { AuthService } from '../../core/services/auth.service';
 import { CommentsService } from '../../core/services/comments.service';
 import { ProfilesService } from '../../core/services/profiles.service';
 import { TagList } from '../../shared/components/tag-list/tag-list';
+import { Icon } from '../../shared/components/icon/icon';
 import { MarkdownPipe } from '../../shared/pipes/markdown.pipe';
 import { CommentForm } from './comment-form/comment-form';
 import { CommentList } from './comment-list/comment-list';
 
 @Component({
   selector: 'app-article-page',
-  imports: [RouterLink, DatePipe, TagList, CommentForm, CommentList, MarkdownPipe],
+  imports: [RouterLink, DatePipe, TagList, CommentForm, CommentList, MarkdownPipe, Icon],
   templateUrl: './article-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

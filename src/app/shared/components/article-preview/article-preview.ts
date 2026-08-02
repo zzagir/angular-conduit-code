@@ -6,10 +6,11 @@ import { ArticlesService } from '../../../core/services/articles.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Article } from '../../../core/models/article.model';
 import { TagList } from '../tag-list/tag-list';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-article-preview',
-  imports: [RouterLink, DatePipe, TagList],
+  imports: [RouterLink, DatePipe, TagList, Icon],
   templateUrl: './article-preview.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

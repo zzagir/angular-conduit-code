@@ -1,1 +1,412 @@
-/* You can add global styles to this file, and also import other style files */
+// Self-hosted theme for the RealWorld "Conduit" look.
+//
+// The reference implementations traditionally load a shared, pre-built
+// stylesheet from https://demo.productionready.io/main.css plus icon fonts
+// from https://code.ionicframework.com. Both of those hosts now return
+// HTTP 403 for every request, so this file recreates the same visual
+// design on top of a locally installed Bootstrap 4 (see angular.json
+// "styles") instead of depending on third-party CDNs that can disappear.
+// Icons (previously the Ionicons font) are now inline SVGs rendered by
+// shared/components/icon/icon.ts.
+
+$conduit-green: #5cb85c;
+$conduit-green-dark: #449d44;
+$conduit-gray-bg: #f3f3f3;
+$conduit-border: #e5e5e5;
+
+body {
+  background: $conduit-gray-bg;
+  color: #373a3c;
+}
+
+a {
+  color: $conduit-green;
+
+  &:hover {
+    color: $conduit-green-dark;
+  }
+}
+
+@mixin logo-font {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 700;
+}
+
+.logo-font {
+  @include logo-font;
+}
+
+// Bootstrap 4 dropped the responsive `pull-*-right` / `pull-right`
+// helpers that the original Conduit markup relies on.
+.pull-xs-right,
+.pull-right {
+  float: right !important;
+}
+
+.btn-primary {
+  background-color: $conduit-green;
+  border-color: $conduit-green;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $conduit-green-dark;
+    border-color: $conduit-green-dark;
+  }
+
+  // Bootstrap's own `.btn-primary:disabled` / `.btn-primary.disabled` rule
+  // is more specific (two class/pseudo-class selectors) than a plain
+  // `.btn-primary` override above, so it wins on specificity regardless of
+  // source order and needs its own override here.
+  &:disabled,
+  &.disabled {
+    background-color: $conduit-green;
+    border-color: $conduit-green;
+  }
+}
+
+.btn-outline-primary {
+  color: $conduit-green;
+  border-color: $conduit-green;
+
+  &:hover {
+    background-color: $conduit-green;
+    border-color: $conduit-green;
+  }
+}
+
+// Header
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid $conduit-border;
+  padding: 0.75rem 0;
+
+  .navbar-brand {
+    @include logo-font;
+    color: #333;
+    font-size: 1.5rem;
+  }
+
+  .nav-link {
+    color: #999;
+
+    &.active {
+      color: #333;
+      font-weight: 600;
+    }
+  }
+
+  .user-pic {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.25rem;
+  }
+}
+
+// Home page banner
+.banner {
+  background: #333;
+  color: #fff;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  h1 {
+    @include logo-font;
+    font-size: 3.5rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  p {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+}
+
+.feed-toggle,
+.articles-toggle {
+  margin-bottom: 1.5rem;
+
+  .nav-pills {
+    border-bottom: 1px solid $conduit-border;
+  }
+
+  .nav-link {
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    color: #999;
+    padding: 0.5rem 1rem;
+    background: none;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+
+    &.active {
+      color: $conduit-green;
+      background: none;
+      border-bottom-color: $conduit-green;
+    }
+  }
+}
+
+// Article preview cards on the home / profile feeds
+.article-preview {
+  background: #fff;
+  border-top: 1px solid $conduit-border;
+  padding: 1.5rem 0;
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 0.5rem;
+    }
+
+    .info {
+      display: inline-block;
+
+      .author {
+        display: block;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .date {
+        font-size: 0.8rem;
+        color: #bbb;
+      }
+    }
+  }
+
+  .preview-link {
+    display: block;
+    color: inherit;
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+
+    span {
+      color: #ccc;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Tags
+.tag-list,
+.tag-pill {
+  display: inline-block;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.tag-pill {
+  display: inline-block;
+  padding: 0.15rem 0.65rem;
+  margin: 0 0.25rem 0.25rem 0;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  border: none;
+  cursor: default;
+}
+
+.tag-default {
+  background: #ccc;
+  color: #fff;
+
+  &.tag-outline {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #999;
+  }
+
+  &.tag-primary,
+  &:hover:not(.tag-outline) {
+    background: $conduit-green;
+    color: #fff;
+  }
+}
+
+button.tag-pill {
+  cursor: pointer;
+}
+
+// Sidebar
+.sidebar {
+  background: $conduit-gray-bg;
+  padding: 1.5rem;
+  border-radius: 4px;
+
+  p {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+}
+
+// Auth / settings / editor forms
+.auth-page,
+.settings-page,
+.editor-page {
+  padding: 2rem 0;
+
+  h1 {
+    @include logo-font;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Article page
+.article-page {
+  .banner {
+    text-align: left;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 0.5rem;
+    }
+
+    .info {
+      display: inline-block;
+      margin-right: 1rem;
+
+      .author {
+        display: block;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .date {
+        font-size: 0.8rem;
+        color: #bbb;
+      }
+    }
+  }
+
+  .article-content {
+    padding: 2rem 0;
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+}
+
+// Comments
+.card.comment-form,
+.card {
+  border: 1px solid $conduit-border;
+  margin-bottom: 1rem;
+
+  textarea {
+    border: none;
+    resize: vertical;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $conduit-gray-bg;
+  }
+}
+
+.comment-author-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mod-options {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+
+  &:hover {
+    color: #b85c5c;
+  }
+}
+
+// Profile page
+.profile-page {
+  .user-info {
+    background: $conduit-gray-bg;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    .user-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .action-btn {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+// Footer
+footer {
+  background: #f3f3f3;
+  border-top: 1px solid $conduit-border;
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+  color: #999;
+  font-size: 0.85rem;
+
+  .logo-font {
+    color: #333;
+    margin-right: 0.5rem;
+  }
+}
+
+.error-messages {
+  color: #b85c5c;
+  padding-left: 1.25rem;
+}
+
+// Inline SVG icons (app-icon) should sit on the text baseline like the
+// icon-font glyphs they replace, not stretch to their own line.
+app-icon {
+  display: inline-flex;
+  vertical-align: -0.125em;
+}
+
+.mod-options app-icon,
+app-icon.tag-remove {
+  cursor: pointer;
+}

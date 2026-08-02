@@ -18,7 +18,7 @@
       <span class="date-posted">{{ comment.createdAt | date: 'longDate' }}</span>
       @if (comment.author.username === currentUsername()) {
         <span class="mod-options">
-          <i class="ion-trash-a" (click)="deleteComment.emit(comment.id)"></i>
+          <app-icon name="trash-fill" (click)="deleteComment.emit(comment.id)" />
         </span>
       }
     </div>

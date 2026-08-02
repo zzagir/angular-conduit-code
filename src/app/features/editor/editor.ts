@@ -11,10 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticlesService } from '../../core/services/articles.service';
 import { ListErrors } from '../../shared/components/list-errors/list-errors';
+import { Icon } from '../../shared/components/icon/icon';
 
 @Component({
   selector: 'app-editor',
-  imports: [ReactiveFormsModule, FormsModule, ListErrors],
+  imports: [ReactiveFormsModule, FormsModule, ListErrors, Icon],
   templateUrl: './editor.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

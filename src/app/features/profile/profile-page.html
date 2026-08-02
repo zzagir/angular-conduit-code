@@ -22,7 +22,7 @@
                 [class.btn-outline-secondary]="!prof.following"
                 (click)="toggleFollow()"
               >
-                <i class="ion-plus-round"></i>
+                <app-icon name="person-plus-fill" />
                 {{ prof.following ? 'Unfollow' : 'Follow' }} {{ prof.username }}
               </button>
             }
