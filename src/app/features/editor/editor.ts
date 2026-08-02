@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { extractApiErrors } from '../../core/api-error.util';
 import { ArticlesService } from '../../core/services/articles.service';
 import { ListErrors } from '../../shared/components/list-errors/list-errors';
 import { Icon } from '../../shared/components/icon/icon';
@@ -90,7 +91,7 @@ export class Editor {
       },
       error: (error: HttpErrorResponse) => {
         this.isSubmitting.set(false);
-        this.errors.set(error.error?.errors ?? { '': ['Unable to save article'] });
+        this.errors.set(extractApiErrors(error, 'Unable to save article'));
       },
     });
   }
